@@ -1,0 +1,500 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background: #222831;
+    color: #eeeeee;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+.container {
+    flex: 1 0 auto;
+    padding: 20px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 60px;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #222831 !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    padding: 12px 15px;
+    border-bottom: 1px solid #393e46;
+}
+
+.navbar-brand {
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: #76ABAE !important;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.metro-icon {
+    font-size: 1.8rem;
+}
+
+.language-toggle {
+    border-color: #76ABAE !important;
+    color: #76ABAE !important;
+    transition: all 0.3s ease;
+}
+
+.language-toggle:hover {
+    background-color: #76ABAE !important;
+    color: #222831 !important;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #eeeeee;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: #76ABAE;
+}
+
+.bg-primary {
+    background-color: #222831 !important;
+}
+
+/* Card and Form */
+.card {
+    border-radius: 15px;
+    background: #2d333f;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+    border: 1px solid #393e46 !important;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.card-body {
+    padding: 1.8rem !important;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: #76ABAE !important;
+    margin-bottom: 1.5rem;
+}
+
+h5 {
+    color: #76ABAE;
+    font-weight: 600;
+}
+
+.text-primary {
+    color: #76ABAE !important;
+}
+
+.form-label {
+    font-weight: 500;
+    color: #eeeeee;
+    margin-bottom: 0.5rem;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.form-control {
+    border-radius: 10px;
+    border: 1px solid #393e46;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    background-color: #393e46;
+    color: #eeeeee;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #76ABAE;
+    box-shadow: 0 0 10px rgba(118, 171, 174, 0.3);
+    outline: none;
+    background-color: #393e46;
+    color: #ffffff;
+}
+
+.form-control::placeholder {
+    color: #aaaaaa;
+}
+
+.input-group-text {
+    background-color: #76ABAE;
+    color: #222831;
+    border: 1px solid #76ABAE;
+    border-radius: 0 10px 10px 0;
+}
+
+.dropdown-icon {
+    background: #76ABAE;
+    color: #222831;
+    border-radius: 0 10px 10px 0;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dropdown-icon:hover {
+    background-color: #5f8a8c;
+}
+
+.invalid-feedback {
+    color: #ffb6b6;
+}
+
+.autocomplete-items {
+    position: absolute;
+    border: 1px solid #393e46;
+    border-top: none;
+    z-index: 99;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #2d333f;
+    border-radius: 0 0 10px 10px;
+    max-height: 250px;
+    overflow-y: auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #2d333f;
+    border-bottom: 1px solid #393e46;
+    color: #eeeeee;
+    transition: all 0.2s ease;
+}
+
+.autocomplete-items div:hover,
+.autocomplete-active {
+    background-color: #393e46 !important;
+    color: #76ABAE;
+}
+
+.autocomplete-items div:last-child {
+    border-bottom: none;
+}
+
+/* Station Line Info */
+.station-line-info {
+    margin-top: 8px;
+    font-size: 0.85rem;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.line-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.blue-line {
+    background-color: #1e40af;
+    color: white;
+}
+
+.green-line {
+    background-color: #16a34a;
+    color: white;
+}
+
+.purple-line {
+    background-color: #9333ea;
+    color: white;
+}
+
+.orange-line {
+    background-color: #ea580c;
+    color: white;
+}
+
+/* Button Styles */
+.btn-primary {
+    background-color: #76ABAE !important;
+    border: none !important;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: #222831;
+}
+
+.btn-primary:hover {
+    background-color: #5f8a8c !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary:focus {
+    box-shadow: 0 0 0 0.25rem rgba(118, 171, 174, 0.4) !important;
+}
+
+.btn-primary:active {
+    transform: translateY(1px);
+}
+
+/* Fare Result */
+.fare-result {
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: none;
+}
+
+.fare-result.success {
+    background: linear-gradient(to right, #2d333f, #344055);
+    color: #eeeeee;
+    border: 1px solid #393e46;
+    display: block;
+}
+
+.fare-result.error {
+    background: linear-gradient(to right, #513338, #5e3a3a);
+    color: #eeeeee;
+    border: 1px solid #513338;
+    display: block;
+}
+
+.fare-amount {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #93c5c8;
+    padding: 5px 0;
+}
+
+.station-name {
+    font-style: italic;
+    color: #a6c1ee;
+}
+
+/* Route Details */
+.route-details {
+    display: none;
+    background: #2d333f;
+    border: 1px solid #393e46;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.route-details.show {
+    display: block;
+    animation: softFadeIn 0.5s ease-out forwards;
+}
+
+.route-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.route-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #76ABAE;
+}
+
+.route-info-item {
+    display: inline-block;
+    padding: 6px 12px;
+    background: #393e46;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    margin: 5px;
+}
+
+.route-info-item strong {
+    color: #76ABAE;
+}
+
+.route-path {
+    margin-top: 15px;
+}
+
+.route-path-title {
+    font-size: 0.95rem;
+    color: #aaaaaa;
+    margin-bottom: 10px;
+}
+
+.station-path {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+
+.station-node {
+    padding: 8px 12px;
+    background: #393e46;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    border-left: 3px solid #76ABAE;
+}
+
+.station-node.transfer {
+    border-left-color: #ea580c;
+    background: #4a3f35;
+}
+
+.path-arrow {
+    color: #76ABAE;
+    font-size: 1.2rem;
+}
+
+.transfer-note {
+    margin-top: 15px;
+    padding: 10px;
+    background: #4a3f35;
+    border-left: 3px solid #ea580c;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+/* Line Legend */
+.line-legend {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.legend-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.legend-item small {
+    color: #aaaaaa;
+    font-size: 0.8rem;
+}
+
+/* Footer */
+footer {
+    background: #222831;
+    color: #eeeeee;
+    padding: 15px 0;
+    text-align: center;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+    border-top: 1px solid #393e46;
+}
+
+.bg-dark {
+    background-color: #222831 !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+        margin-bottom: 60px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+
+    .card-body {
+        padding: 1.2rem !important;
+    }
+
+    .form-control,
+    .btn-primary {
+        font-size: 0.95rem;
+        padding: 0.6rem;
+    }
+
+    .fare-result {
+        font-size: 1rem;
+        padding: 15px;
+    }
+
+    .fare-amount {
+        font-size: 1.4rem;
+    }
+
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+
+    .metro-icon {
+        font-size: 1.4rem;
+    }
+
+    .line-legend {
+        grid-template-columns: 1fr;
+    }
+
+    .station-path {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .path-arrow {
+        transform: rotate(90deg);
+    }
+}
+
+@media (max-height: 700px) {
+    .container {
+        margin-bottom: 70px;
+    }
+}
+
+/* Custom Animation */
+@keyframes softFadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#result.fare-result.success,
+#result.fare-result.error {
+    animation: softFadeIn 0.5s ease-out forwards;
+}
+
+/* Scrollbar Styling */
+.autocomplete-items::-webkit-scrollbar {
+    width: 8px;
+}
+
+.autocomplete-items::-webkit-scrollbar-track {
+    background: #2d333f;
+}
+
+.autocomplete-items::-webkit-scrollbar-thumb {
+    background: #76ABAE;
+    border-radius: 4px;
+}
+
+.autocomplete-items::-webkit-scrollbar-thumb:hover {
+    background: #5f8a8c;
+}
