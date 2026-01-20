@@ -319,18 +319,37 @@ function findCommonLines(station1, station2) {
     return lines1.filter(line => lines2.includes(line));
 }
 
-// Find transfer station and calculate route
 function findTransferRoute(fromStation, toStation) {
     const fromLines = stationLines[fromStation] || [];
     const toLines = stationLines[toStation] || [];
-    
-    // Direct connection transfer points
-    const directTransfers = {
-        'Blue-Green': 'Esplanade',
-        'Green-Blue': 'Esplanade',
-        'Blue-Yellow': 'Noapara',
-        'Yellow-Blue': 'Noapara'
+
+    // 1. Check for Direct Intersections (Junctions)
+    const junctions = {
+        'Esplanade': { lines: ['Blue', 'Green'] },
+        'Noapara': { lines: ['Blue', 'Yellow'] },
+        'Kavi Subhash': { lines: ['Blue', 'Orange'] }
     };
+
+    for (let junc in junctions) {
+        const juncLines = junctions[junc].lines;
+        const canReachJunc = fromLines.some(l => juncLines.includes(l));
+        const canLeaveJunc = toLines.some(l => juncLines.includes(l));
+
+        if (canReachJunc && canLeaveJunc) {
+            return {
+                transferStation: junc,
+                type: "Direct Transfer",
+                fromLine: fromLines.find(l => juncLines.includes(l)),
+                toLine: toLines.find(l => juncLines.includes(l)),
+                segments: [
+                    { from: fromStation, to: junc },
+                    { from: junc, to: toStation }
+                ]
+            };
+        }
+    }
+    return null;
+}
     
     // Check for direct transfer
     for (let fromLine of fromLines) {
@@ -461,15 +480,40 @@ function calculateFare() {
             `;
         }
     } else {
-        // Need transfer - calculate route
-        const transferRoute = findTransferRoute(fromStation, toStation);
+        const route = findTransferRoute(fromStation, toStation);
         
-        if (!transferRoute) {
-            result.textContent = "Route not available. Please check station names!";
-            result.classList.add("error");
-            result.style.display = "block";
+        if (!route) {
+            result.innerHTML = "Route not available between these lines yet.";
+            result.className = "fare-result error block";
             return;
         }
+
+        const fare1 = fareData[route.segments[0].from][route.segments[0].to] || 0;
+        const fare2 = fareData[route.segments[1].from][route.segments[1].to] || 0;
+        totalFare = fare1 + fare2;
+
+        result.innerHTML = `<span class="fare-amount">₹${totalFare}</span><br>${fromStation} → ${toStation}`;
+        result.className = "fare-result success block";
+
+        routeHTML = `
+            <div class="route-container" style="text-align: left; border: 1px solid #393e46; border-radius: 10px; padding: 15px;">
+                <div class="route-step mb-2">
+                    <span class="line-badge ${route.fromLine.toLowerCase()}-line">${route.fromLine} Line</span>
+                    <div class="ms-2 mt-1"><strong>${fromStation}</strong> → ${route.transferStation}</div>
+                </div>
+
+                <div class="transfer-box text-center my-3" style="background: #393e46; padding: 10px; border-radius: 8px; border: 1px dashed #76ABAE;">
+                    <div style="font-size: 0.8rem; color: #76ABAE; text-transform: uppercase;">Change Train at</div>
+                    <div style="font-weight: 700; font-size: 1.1rem;">${route.transferStation}</div>
+                </div>
+
+                <div class="route-step">
+                    <span class="line-badge ${route.toLine.toLowerCase()}-line">${route.toLine} Line</span>
+                    <div class="ms-2 mt-1"><strong>${route.transferStation}</strong> → ${toStation}</div>
+                </div>
+            </div>
+        `;
+    }
         
         // Calculate segment fares
         let segments = [];
