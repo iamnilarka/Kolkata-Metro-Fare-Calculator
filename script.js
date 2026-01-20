@@ -323,7 +323,7 @@ function findTransferRoute(fromStation, toStation) {
     const fromLines = stationLines[fromStation] || [];
     const toLines = stationLines[toStation] || [];
 
-    // 1. Check for Direct Intersections (Junctions)
+    // Defined junctions based strictly on your map
     const junctions = {
         'Esplanade': { lines: ['Blue', 'Green'] },
         'Noapara': { lines: ['Blue', 'Yellow'] },
@@ -332,13 +332,14 @@ function findTransferRoute(fromStation, toStation) {
 
     for (let junc in junctions) {
         const juncLines = junctions[junc].lines;
+        // Check if starting station can reach this junction
         const canReachJunc = fromLines.some(l => juncLines.includes(l));
+        // Check if destination can be reached from this junction
         const canLeaveJunc = toLines.some(l => juncLines.includes(l));
 
         if (canReachJunc && canLeaveJunc) {
             return {
                 transferStation: junc,
-                type: "Direct Transfer",
                 fromLine: fromLines.find(l => juncLines.includes(l)),
                 toLine: toLines.find(l => juncLines.includes(l)),
                 segments: [
@@ -479,41 +480,48 @@ function calculateFare() {
                 </div>
             `;
         }
-    } else {
-        const route = findTransferRoute(fromStation, toStation);
-        
-        if (!route) {
-            result.innerHTML = "Route not available between these lines yet.";
-            result.className = "fare-result error block";
-            return;
-        }
+   } else {
+    const route = findTransferRoute(fromStation, toStation);
 
-        const fare1 = fareData[route.segments[0].from][route.segments[0].to] || 0;
-        const fare2 = fareData[route.segments[1].from][route.segments[1].to] || 0;
-        totalFare = fare1 + fare2;
-
-        result.innerHTML = `<span class="fare-amount">₹${totalFare}</span><br>${fromStation} → ${toStation}`;
-        result.className = "fare-result success block";
-
-        routeHTML = `
-            <div class="route-container" style="text-align: left; border: 1px solid #393e46; border-radius: 10px; padding: 15px;">
-                <div class="route-step mb-2">
-                    <span class="line-badge ${route.fromLine.toLowerCase()}-line">${route.fromLine} Line</span>
-                    <div class="ms-2 mt-1"><strong>${fromStation}</strong> → ${route.transferStation}</div>
-                </div>
-
-                <div class="transfer-box text-center my-3" style="background: #393e46; padding: 10px; border-radius: 8px; border: 1px dashed #76ABAE;">
-                    <div style="font-size: 0.8rem; color: #76ABAE; text-transform: uppercase;">Change Train at</div>
-                    <div style="font-weight: 700; font-size: 1.1rem;">${route.transferStation}</div>
-                </div>
-
-                <div class="route-step">
-                    <span class="line-badge ${route.toLine.toLowerCase()}-line">${route.toLine} Line</span>
-                    <div class="ms-2 mt-1"><strong>${route.transferStation}</strong> → ${toStation}</div>
-                </div>
-            </div>
-        `;
+    if (!route) {
+        result.innerHTML = "Route not available between these lines yet.";
+        result.className = "fare-result error block";
+        result.style.display = "block";
+        return;
     }
+
+    // Calculating total fare from segments
+    const fare1 = (fareData[route.segments[0].from] && fareData[route.segments[0].from][route.segments[0].to]) || 0;
+    const fare2 = (fareData[route.segments[1].from] && fareData[route.segments[1].from][route.segments[1].to]) || 0;
+    const totalFare = fare1 + fare2;
+
+    result.innerHTML = `<span class="fare-amount">₹${totalFare}</span><br>${fromStation} → ${toStation}`;
+    result.className = "fare-result success block";
+    result.style.display = "block";
+
+    routeHTML = `
+        <div class="route-container" style="text-align: left; border: 1px solid #393e46; border-radius: 10px; padding: 15px;">
+            <div class="route-step mb-2">
+                <span class="line-badge ${route.fromLine.toLowerCase()}-line">${route.fromLine} Line</span>
+                <div class="ms-2 mt-1"><strong>${fromStation}</strong> → ${route.transferStation}</div>
+            </div>
+
+            <div class="transfer-box text-center my-3" style="background: #393e46; padding: 10px; border-radius: 8px; border: 1px dashed #76ABAE;">
+                <div style="font-size: 0.8rem; color: #76ABAE; text-transform: uppercase;">Change Train at</div>
+                <div style="font-weight: 700; font-size: 1.1rem;">${route.transferStation}</div>
+            </div>
+
+            <div class="route-step">
+                <span class="line-badge ${route.toLine.toLowerCase()}-line">${route.toLine} Line</span>
+                <div class="ms-2 mt-1"><strong>${route.transferStation}</strong> → ${toStation}</div>
+            </div>
+        </div>
+    `;
+    
+    routeDetails.innerHTML = routeHTML;
+    routeDetails.style.display = "block";
+    routeDetails.classList.add("show");
+}
         
         // Calculate segment fares
         let segments = [];
