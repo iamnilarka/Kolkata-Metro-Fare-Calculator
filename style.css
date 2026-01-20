@@ -224,6 +224,11 @@ h5 {
     color: white;
 }
 
+.yellow-line {
+    background-color: #eab308;
+    color: #222831;
+}
+
 /* Button Styles */
 .btn-primary {
     background-color: #76ABAE !important;
